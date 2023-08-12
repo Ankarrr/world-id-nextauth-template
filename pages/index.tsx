@@ -28,16 +28,25 @@ export default function IndexPage() {
         <a href="https://next-auth.js.org">NextAuth.js</a> with {" "}
         <a href ="https://worldcoin.org/world-id">World ID</a> for authentication.
       </p>
-      <IDKitWidget
-        app_id={appId} // obtained from the Developer Portal
-        action={action} // this is your action name from the Developer Portal
-        onSuccess={onSuccess} // callback when the modal is closed
-        handleVerify={handleVerify} // optional callback when the proof is received
-        // credential_types={['orb', 'phone']} // the credentials you want to accept
-        // enableTelemetry // optional, defaults to false
-      >
-        {({ open }) => <button onClick={open}>Verify with World ID</button>}
-      </IDKitWidget>
+      <div>
+        <IDKitWidget
+          app_id={appId} // obtained from the Developer Portal
+          action={action} // this is your action name from the Developer Portal
+          onSuccess={onSuccess} // callback when the modal is closed
+          handleVerify={handleVerify} // optional callback when the proof is received
+          // credential_types={['orb', 'phone']} // the credentials you want to accept
+          // enableTelemetry // optional, defaults to false
+        >
+          {({ open }) => <button onClick={open}>Verify with World ID</button>}
+        </IDKitWidget>
+        {proof ? (
+          <p>
+            <li>{`nullifier_hash: ${proof?.nullifier_hash}`}</li>
+            <li>{`merkle_root: ${proof?.merkle_root}`}</li>
+            <li>{`proof: ${proof?.proof}`}</li>
+          </p>
+        ) : null}
+      </div>
   </Layout>
   )
 }
